@@ -1,0 +1,48 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*_test
+
+# Output of the go tool
+.cache
+.idea/
+.vscode/
+
+# Dependencies
+vendor/
+
+# Go workspace file
+go.work
+
+# Local environment variables and secrets
+.env
+.env.*
+*.pem
+*.key
+*.log
+
+# IDE-specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.tmp
+*~
+*.swp
+*.swo
+
+# Project specific ignores
+ssh-manager # The compiled binary if it's named after the directory
+backup_finalboss.yaml
+secure_backup.yaml

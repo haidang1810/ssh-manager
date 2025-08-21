@@ -1,0 +1,12 @@
+connections:
+    finalbosstest:
+        name: finalbosstest
+        host: finalbosshost
+        port: 22
+        user: finalbossuser
+        created_at: 1755749782
+settings:
+    encrypt_passwords: false
+    log_connections: false
+    log_path: ""
+    editor: ""

@@ -1,0 +1,25 @@
+connections:
+    finalbosstest:
+        name: finalbosstest
+        host: finalbosshost
+        port: 22
+        user: finalbossuser
+        created_at: 1755749782
+    securetest:
+        name: securetest
+        host: localhost
+        port: 22
+        user: secureuser
+        password: 4n5nwO1lxKYTjl54VfxNRfcTOmcktK+Dz8G9DgBdBUS04arkyVUChp8jwhU=
+        created_at: 1755750382
+    shorthandtest:
+        name: shorthandtest
+        host: localhost
+        port: 22
+        user: testuser
+        created_at: 1755750082
+settings:
+    encrypt_passwords: false
+    log_connections: false
+    log_path: ""
+    editor: ""
