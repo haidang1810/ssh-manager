@@ -4,56 +4,50 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"sync"
 
 	"github.com/spf13/viper"
 	"gopkg.in/yaml.v3"
 	"sm/internal/models"
 )
 
-var (
-	appConfig *models.AppConfig
-	once      sync.Once
-)
-
 // GetConfig returns a singleton instance of the AppConfig.
 // It loads the configuration from the file on its first call.
 func GetConfig() (*models.AppConfig, error) {
-	var loadErr error
-	once.Do(func() {
-		appConfig = &models.AppConfig{
-			Connections: make(map[string]models.Connection),
-			SSHKeys:     make(map[string]models.SSHKey),
-		}
+	appConfig := &models.AppConfig{
+		Connections: make(map[string]models.Connection),
+		SSHKeys:     make(map[string]models.SSHKey),
+	}
 
-		configFile := viper.ConfigFileUsed()
-		if configFile == "" {
-			// Config file not found, proceed with empty config.
-			// Initialize NextID for new configurations
+	home, err := os.UserHomeDir()
+	if err != nil {
+		return nil, fmt.Errorf("could not get home directory: %w", err)
+	}
+	configFile := fmt.Sprintf("%s/.ssh-manager/config.yaml", home)
+
+	bytes, err := ioutil.ReadFile(configFile)
+	if err != nil {
+		if os.IsNotExist(err) {
 			appConfig.NextID = 1
-			return
+			return appConfig, nil
 		}
+		return nil, fmt.Errorf("could not read config file: %w", err)
+	}
 
-		// Bypass viper.Unmarshal due to issues with time.Time/int64 fields.
-		// Read the file manually and unmarshal with yaml.v3.
-		bytes, err := ioutil.ReadFile(configFile)
-		if err != nil {
-			loadErr = fmt.Errorf("could not read config file: %w", err)
-			return
-		}
+	if len(bytes) == 0 {
+		appConfig.NextID = 1
+		return appConfig, nil
+	}
 
-		err = yaml.Unmarshal(bytes, &appConfig)
-		if err != nil {
-			loadErr = fmt.Errorf("unable to decode into struct: %w", err)
-			return
-		}
+	err = yaml.Unmarshal(bytes, &appConfig)
+	if err != nil {
+		return nil, fmt.Errorf("unable to decode into struct: %w", err)
+	}
 
-		// Initialize NextID if it's 0 (for existing configs without the field)
-		if appConfig.NextID == 0 {
-			appConfig.NextID = 1
-		}
-	})
-	return appConfig, loadErr
+	if appConfig.NextID == 0 {
+		appConfig.NextID = 1
+	}
+
+	return appConfig, nil
 }
 
 // SaveConfig saves the current configuration back to the file.
