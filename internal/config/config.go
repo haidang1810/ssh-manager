@@ -29,6 +29,8 @@ func GetConfig() (*models.AppConfig, error) {
 		configFile := viper.ConfigFileUsed()
 		if configFile == "" {
 			// Config file not found, proceed with empty config.
+			// Initialize NextID for new configurations
+			appConfig.NextID = 1
 			return
 		}
 
@@ -44,6 +46,11 @@ func GetConfig() (*models.AppConfig, error) {
 		if err != nil {
 			loadErr = fmt.Errorf("unable to decode into struct: %w", err)
 			return
+		}
+
+		// Initialize NextID if it's 0 (for existing configs without the field)
+		if appConfig.NextID == 0 {
+			appConfig.NextID = 1
 		}
 	})
 	return appConfig, loadErr

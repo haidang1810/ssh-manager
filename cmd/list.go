@@ -38,13 +38,13 @@ var listCmd = &cobra.Command{
 			fmt.Println(string(out))
 		case "table":
 			w := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
-			fmt.Fprintln(w, "NAME\tUSER\tHOST\tPORT\tKEY PATH\tCREATED AT")
+			fmt.Fprintln(w, "ID\tNAME\tUSER\tHOST\tPORT\tKEY PATH\tCREATED AT")
 			for _, conn := range cfg.Connections {
 				createdAtStr := "n/a"
 				if conn.CreatedAt != 0 {
 					createdAtStr = time.Unix(conn.CreatedAt, 0).Format(time.RFC3339)
 				}
-				fmt.Fprintf(w, "%s\t%s\t%s\t%d\t%s\t%s\n", conn.Name, conn.User, conn.Host, conn.Port, conn.KeyPath, createdAtStr)
+				fmt.Fprintf(w, "%d\t%s\t%s\t%s\t%d\t%s\t%s\n", conn.ID, conn.Name, conn.User, conn.Host, conn.Port, conn.KeyPath, createdAtStr)
 			}
 			w.Flush()
 		default:

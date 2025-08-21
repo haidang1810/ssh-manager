@@ -98,6 +98,7 @@ var addCmd = &cobra.Command{
 		}
 
 		newConn := models.Connection{
+			ID:        cfg.NextID, // Assign the current NextID
 			Name:      name,
 			Host:      host,
 			User:      user,
@@ -108,6 +109,7 @@ var addCmd = &cobra.Command{
 		}
 
 		cfg.Connections[name] = newConn
+		cfg.NextID++ // Increment NextID for the next connection
 
 		if err := config.SaveConfig(cfg); err != nil {
 			return fmt.Errorf("failed to save config: %w", err)

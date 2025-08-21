@@ -5,6 +5,7 @@ import "time"
 // Connection represents a single SSH connection configuration.
 // It contains all necessary details to establish an SSH session.
 type Connection struct {
+	ID          int               `json:"id" yaml:"id"`
 	Name        string            `json:"name" yaml:"name"`
 	Host        string            `json:"host" yaml:"host"`
 	Port        int               `json:"port" yaml:"port"`
@@ -40,6 +41,7 @@ type Settings struct {
 // Note: The name in the docs is `Config`, which can be confusing.
 // I'm naming it `AppConfig` to avoid conflicts with package names.
 type AppConfig struct {
+	NextID         int                   `json:"next_id" yaml:"next_id"`
 	DefaultUser    string                `yaml:"default_user,omitempty"`
 	DefaultPort    int                   `yaml:"default_port,omitempty"`
 	DefaultKeyPath string                `yaml:"default_key_path,omitempty"`
