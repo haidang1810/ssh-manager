@@ -47,7 +47,7 @@ After downloading, follow the instructions below depending on your operating sys
 4.  **Verify Installation:** Open a new Terminal and run the following command to verify.
 
     ```bash
-    ssh-manager --version
+    ssh-manager
     ```
 
 #### b. On Windows
