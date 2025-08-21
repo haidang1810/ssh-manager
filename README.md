@@ -32,13 +32,11 @@ After downloading, follow the instructions below depending on your operating sys
     ```bash
     curl -LO https://github.com/haidang1810/ssh-manager/releases/download/v1.0.0/ssh-manager-v1.0.0-<os>-<arch>.tar.gz
     ```
-2.  **Extract:** Open Terminal and extract the downloaded file.
+2.  **Extract:** Open Terminal and extract the downloaded file, and rename it to `ssh-manager`:
 
     ```bash
-    tar -xzf ssh-manager-<version>-<os>-<arch>.tar.gz
+    tar -xzf ssh-manager-<version>-<os>-<arch>.tar.gz -O ssh-manager-<os>-<arch> > ssh-manager
     ```
-
-    This will extract the `ssh-manager` executable into the current directory.
 3.  **Move to PATH:** Move the executable to a directory included in your system's `PATH` environment variable (e.g., `/usr/local/bin/`). This allows you to run the `ssh-manager` command from anywhere in the Terminal.
 
     ```bash
