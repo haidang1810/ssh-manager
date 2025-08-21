@@ -27,7 +27,11 @@ After downloading, follow the instructions below depending on your operating sys
 
 #### a. On Linux and macOS
 
-1.  **Download:** Download the appropriate `.tar.gz` file for your system (e.g., `ssh-manager-<version>-linux-amd64.tar.gz`).
+1.  **Download:** Download the appropriate `.tar.gz` file for your system (e.g., `ssh-manager-<version>-linux-amd64.tar.gz`). You can use `curl` to download it directly:
+
+    ```bash
+    curl -LO https://github.com/haidang1810/ssh-manager/releases/download/v1.0.0/ssh-manager-v1.0.0-<os>-<arch>.tar.gz
+    ```
 2.  **Extract:** Open Terminal and extract the downloaded file.
 
     ```bash
