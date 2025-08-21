@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/terminal"
@@ -35,14 +36,27 @@ decryptedPassword := conn.Password
 		}
 
 		var signer ssh.Signer
-		if decryptedPassword != "" {
-			signer, err = ssh.ParsePrivateKeyWithPassphrase(key, []byte(decryptedPassword))
-		} else {
-			signer, err = ssh.ParsePrivateKey(key)
+		var parseErr error
+
+		// Try parsing without a passphrase first
+		signer, parseErr = ssh.ParsePrivateKey(key)
+
+		// If parsing without passphrase fails and it's due to passphrase protection, prompt for it
+		if parseErr != nil && strings.Contains(parseErr.Error(), "passphrase protected") {
+			fmt.Print("Enter passphrase for private key: ")
+			bytePassphrase, err := terminal.ReadPassword(int(os.Stdin.Fd()))
+			fmt.Println() // Newline after password input
+			if err != nil {
+				return fmt.Errorf("failed to read passphrase: %w", err)
+			}
+			passphrase := string(bytePassphrase)
+
+			signer, parseErr = ssh.ParsePrivateKeyWithPassphrase(key, []byte(passphrase))
 		}
 
-		if err != nil {
-			return fmt.Errorf("unable to parse private key: %w", err)
+		// If there's still an error after trying with/without passphrase, return it
+		if parseErr != nil {
+			return fmt.Errorf("unable to parse private key: %w", parseErr)
 		}
 		authMethods = append(authMethods, ssh.PublicKeys(signer))
 	} else if decryptedPassword != "" {
