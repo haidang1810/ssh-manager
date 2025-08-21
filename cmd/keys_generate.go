@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
-	"ssh-manager/internal/config"
-	"ssh-manager/internal/models"
-	"ssh-manager/internal/ssh"
+	"sm/internal/config"
+	"sm/internal/models"
+	"sm/internal/ssh"
 )
 
 // keysGenerateCmd represents the generate command for keys

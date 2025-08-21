@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"ssh-manager/internal/config"
-	"ssh-manager/internal/models"
+	"sm/internal/config"
+	"sm/internal/models"
 )
 
 // keysAddCmd represents the add command for keys

@@ -6,7 +6,7 @@ import (
 	"text/tabwriter"
 
 	"github.com/spf13/cobra"
-	"ssh-manager/internal/config"
+	"sm/internal/config"
 )
 
 // keysListCmd represents the list command for keys

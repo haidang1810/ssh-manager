@@ -1,8 +1,8 @@
-# SSH Connection Manager - Project Documentation
+# SM - Project Documentation
 
 ## Project Overview
 
-**Project Name:** SSH Connection Manager  
+**Project Name:** SM  
 **Language:** Go (Golang)  
 **Type:** CLI Terminal Tool  
 **Target:** Cross-platform (Linux, macOS, Windows)  
@@ -14,7 +14,7 @@ A command-line tool to manage SSH connections efficiently, allowing users to sav
 ## Project Structure
 
 ```
-ssh-manager/
+sm/
 ├── cmd/
 │   ├── root.go              # Root command setup
 │   ├── add.go               # Add new SSH connection
@@ -81,46 +81,46 @@ ssh-manager/
 ### 1. Connection Management
 ```bash
 # Add new connection
-ssh-manager add <name> --host <host> --user <user> [--port <port>] [--key <path>] [--pass <password>]
+sm add <name> --host <host> --user <user> [--port <port>] [--key <path>] [--pass <password>]
 
 # List all connections
-ssh-manager list [--format table|json]
+sm list [--format table|json]
 
 # Connect to server
-ssh-manager connect <name>
-ssh-manager <name>  # shorthand
+sm connect <name>
+sm <name>  # shorthand
 
 # Remove connection
-ssh-manager remove <name>
+sm remove <name>
 
 # Edit existing connection
-ssh-manager edit <name>
+sm edit <name>
 ```
 
 ### 2. Configuration Management
 ```bash
 # Show configuration
-ssh-manager config show
+sm config show
 
 # Set global defaults
-ssh-manager config set default-user myuser
-ssh-manager config set default-port 2222
+sm config set default-user myuser
+sm config set default-port 2222
 
 # Export/Import
-ssh-manager export --output backup.yaml
-ssh-manager import --input backup.yaml
+sm export --output backup.yaml
+sm import --input backup.yaml
 ```
 
 ### 3. SSH Key Management
 ```bash
 # List SSH keys
-ssh-manager keys list
+sm keys list
 
 # Add SSH key
-ssh-manager keys add --name work --path ~/.ssh/work_rsa
+sm keys add --name work --path ~/.ssh/work_rsa
 
 # Generate new key pair
-ssh-manager keys generate --name newkey --type rsa --bits 4096
+sm keys generate --name newkey --type rsa --bits 4096
 ```
 
 ## Data Models
@@ -196,9 +196,9 @@ type Settings struct {
 ### 3. Configuration
 - Config file locations (in priority order):
   1. `--config` flag
-  2. `$SSH_MANAGER_CONFIG`
-  3. `$HOME/.ssh-manager/config.yaml`
-  4. `$HOME/.config/ssh-manager/config.yaml`
+  2. `$SM_CONFIG`
+  3. `$HOME/.sm/config.yaml`
+  4. `$HOME/.config/sm/config.yaml`
 
 ## Build and Release Specification
 
@@ -208,11 +208,11 @@ type Settings struct {
 PLATFORMS := linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64
 
 build-all:
-	@for platform in $(PLATFORMS); do \
-		GOOS=$${platform%/*} GOARCH=$${platform#*/} \
-		go build -ldflags "-X main.version=$(VERSION)" \
-		-o bin/ssh-manager-$${platform%/*}-$${platform#*/} .; \
-	done
+	@for platform in $(PLATFORMS); do 
+		GOOS=${platform%/*} GOARCH=${platform#*/} 
+		go build -ldflags "-X main.version=$(VERSION)" 
+		-o bin/sm-${platform%/*}-${platform#*/} .;
+		done
 ```
 
 ### Release Strategy
@@ -246,7 +246,7 @@ build-all:
 ## User Experience Requirements
 
 ### 1. First-time Setup
-- Interactive setup wizard: `ssh-manager init`
+- Interactive setup wizard: `sm `
 - Import from existing SSH config
 - Generate sample configuration
 

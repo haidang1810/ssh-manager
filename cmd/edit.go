@@ -5,8 +5,8 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"ssh-manager/internal/config"
-	"ssh-manager/internal/utils"
+	"sm/internal/config"
+	"sm/internal/utils"
 )
 
 // editCmd represents the edit command

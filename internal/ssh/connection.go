@@ -8,8 +8,8 @@ import (
 
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/terminal"
-	"ssh-manager/internal/models"
-	"ssh-manager/internal/utils"
+	"sm/internal/models"
+	"sm/internal/utils"
 )
 
 // Connect establishes an interactive SSH session to a remote server.

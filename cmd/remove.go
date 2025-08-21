@@ -7,7 +7,7 @@ import (
 
 	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
-	"ssh-manager/internal/config"
+	"sm/internal/config"
 )
 
 // removeCmd represents the remove command

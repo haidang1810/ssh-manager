@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"ssh-manager/internal/config"
-	"ssh-manager/internal/models"
-	"ssh-manager/internal/ssh"
+	"sm/internal/config"
+	"sm/internal/models"
+	"sm/internal/ssh"
 )
 
 // connectCmd represents the connect command

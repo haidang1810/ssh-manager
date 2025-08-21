@@ -8,7 +8,7 @@ import (
 
 	"github.com/spf13/viper"
 	"gopkg.in/yaml.v3"
-	"ssh-manager/internal/models"
+	"sm/internal/models"
 )
 
 var (

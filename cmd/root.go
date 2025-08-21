@@ -6,17 +6,17 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"ssh-manager/internal/config"
-	"ssh-manager/internal/ssh"
+	"sm/internal/config"
+	"sm/internal/ssh"
 )
 
 var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "ssh-manager [command] [args...]",
+	Use:   "sm [command] [args...]",
 	Short: "A command-line tool to manage SSH connections efficiently.",
-	Long: `SSH-Manager is a CLI tool that helps you save, organize, and 
+	Long: `SM is a CLI tool that helps you save, organize, and 
 quickly connect to your remote servers via SSH.`, // Corrected: Removed unnecessary escaping for newline
 	Args: cobra.ArbitraryArgs, // Allow any arguments
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -69,7 +69,7 @@ cobra.OnInitialize(initConfig)
 	// Here you will define your flags and configuration settings.
 	// Cobra supports a global flag that will be valid for all
 	// subcommands, e.g:
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.ssh-manager/config.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.sm/config.yaml)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -86,14 +86,14 @@ func initConfig() {
 		home, err := os.UserHomeDir()
 		cobra.CheckErr(err)
 
-		// Search config in home directory with name ".ssh-manager" (without extension).
-		viper.AddConfigPath(fmt.Sprintf("%s/.ssh-manager", home))
-		viper.AddConfigPath(fmt.Sprintf("%s/.config/ssh-manager", home))
+		// Search config in home directory with name ".sm" (without extension).
+		viper.AddConfigPath(fmt.Sprintf("%s/.sm", home))
+		viper.AddConfigPath(fmt.Sprintf("%s/.config/sm", home))
 		viper.SetConfigType("yaml")
 		viper.SetConfigName("config")
 	}
 
-	viper.SetEnvPrefix("SSH_MANAGER")
+	viper.SetEnvPrefix("SM")
 	viper.AutomaticEnv()
 
 	// If a config file is found, read it in.

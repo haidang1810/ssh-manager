@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"ssh-manager/internal/config"
+	"sm/internal/config"
 )
 
 // listCmd represents the list command

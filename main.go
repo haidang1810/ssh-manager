@@ -1,6 +1,6 @@
 package main
 
-import "ssh-manager/cmd"
+import "sm/cmd"
 
 func main() {
 	cmd.Execute()

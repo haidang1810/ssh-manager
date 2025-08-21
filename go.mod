@@ -1,4 +1,4 @@
-module ssh-manager
+module sm
 
 go 1.25.0
 

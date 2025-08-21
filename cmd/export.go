@@ -6,7 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v3"
-	"ssh-manager/internal/config"
+	"sm/internal/config"
 )
 
 // exportCmd represents the export command
