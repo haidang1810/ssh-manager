@@ -36,6 +36,7 @@ After downloading, follow the instructions below depending on your operating sys
 
     ```bash
     tar -xzf ssh-manager-<version>-<os>-<arch>.tar.gz -O ssh-manager-<os>-<arch> > ssh-manager
+    chmod +x ssh-manager
     ```
 3.  **Move to PATH:** Move the executable to a directory included in your system's `PATH` environment variable (e.g., `/usr/local/bin/`). This allows you to run the `ssh-manager` command from anywhere in the Terminal.
 
