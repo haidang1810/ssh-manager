@@ -9,6 +9,7 @@ import (
 
 	"github.com/spf13/cobra"
 	"sm/internal/config"
+	"sm/internal/tui"
 )
 
 // listCmd represents the list command
@@ -17,15 +18,21 @@ var listCmd = &cobra.Command{
 	Short: "List all saved SSH connections",
 	Long:  `List all SSH connections saved in the configuration file.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		format, _ := cmd.Flags().GetString("format")
+
+		// If no format specified or format is "tui", launch TUI
+		if format == "" || format == "tui" {
+			return tui.Launch()
+		}
+
+		// Otherwise, use the traditional CLI output
 		cfg, err := config.GetConfig()
 		if err != nil {
 			return fmt.Errorf("failed to get config: %w", err)
 		}
 
-		format, _ := cmd.Flags().GetString("format")
-
 		if len(cfg.Connections) == 0 {
-			fmt.Println("No connections found. Use 'ssh-manager add' to create one.")
+			fmt.Println("No connections found. Use 'sm add' to create one.")
 			return nil
 		}
 
@@ -48,7 +55,7 @@ var listCmd = &cobra.Command{
 			}
 			w.Flush()
 		default:
-			return fmt.Errorf("invalid format: %s. avalid formats are 'table' and 'json'", format)
+			return fmt.Errorf("invalid format: %s. valid formats are 'tui', 'table', and 'json'", format)
 		}
 
 		return nil
@@ -58,5 +65,5 @@ var listCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(listCmd)
 
-	listCmd.Flags().StringP("format", "f", "table", "Output format (table, json)")
+	listCmd.Flags().StringP("format", "f", "", "Output format (tui, table, json). Default: tui")
 }

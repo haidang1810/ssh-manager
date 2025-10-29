@@ -73,8 +73,8 @@ If you want to build the tool from source, you need to have Go (version 1.21 or 
 1.  **Clone repository:**
 
     ```bash
-    git clone https://github.com/haidang1810/sm.git # Replace with actual repo URL
-    cd sm
+    git clone git@github.com:haidang1810/ssh-manager.git
+    cd ssh-manager
     ```
 
 2.  **Build project:**
