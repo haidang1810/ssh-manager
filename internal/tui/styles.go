@@ -14,10 +14,7 @@ var (
 	// Title style
 	titleStyle = lipgloss.NewStyle().
 			Bold(true).
-			Foreground(primaryColor).
-			BorderStyle(lipgloss.RoundedBorder()).
-			BorderForeground(primaryColor).
-			Padding(0, 1)
+			Foreground(primaryColor)
 
 	// Header style
 	headerStyle = lipgloss.NewStyle().
@@ -67,7 +64,7 @@ var (
 	borderStyle = lipgloss.NewStyle().
 			Border(lipgloss.RoundedBorder()).
 			BorderForeground(primaryColor).
-			Padding(1, 2)
+			Padding(0, 1)
 
 	// Dialog style
 	dialogBoxStyle = lipgloss.NewStyle().
