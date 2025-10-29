@@ -8,6 +8,7 @@ import (
 	"github.com/spf13/viper"
 	"sm/internal/config"
 	"sm/internal/ssh"
+	"sm/internal/tui"
 )
 
 var cfgFile string
@@ -20,6 +21,11 @@ var rootCmd = &cobra.Command{
 quickly connect to your remote servers via SSH.`, // Corrected: Removed unnecessary escaping for newline
 	Args: cobra.ArbitraryArgs, // Allow any arguments
 	RunE: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			// No arguments provided - launch TUI
+			return tui.Launch()
+		}
+
 		if len(args) == 1 {
 			connName := args[0]
 
